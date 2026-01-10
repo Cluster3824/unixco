@@ -1,0 +1,23 @@
+# Temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backup files
+*.backup
+*.bak
+*.tmp
+
+# System files
+.cache/
+.local/
+.trash
+
+# Sensitive data
+*.log
+*.pid
+
+# Optional - exclude actual wallpapers/assets if they're large
+# assets/
+# assets-profile/

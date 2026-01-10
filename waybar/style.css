@@ -1,0 +1,118 @@
+@define-color background #2C2A24;
+@define-color second-background #3A372F;
+@define-color text #DDD5C4;
+@define-color borders #A0907A;
+@define-color focused #D08B57;
+@define-color focused2 #BFAA80;
+@define-color color1 #7699A3;
+@define-color color2 #8D7AAE;
+@define-color color3 #78997A;
+@define-color urgent #B05A5A;
+
+* {
+  font-family: "Iosevka Nerd Font";
+  font-size: 15px;
+}
+
+#custom-openbracket,
+#custom-closebracket {
+  margin: 0 5px;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @text;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin-top: 10px;
+  padding: 0 10px;
+  background-color: @background;
+  border: 2px solid @focused;
+}
+
+.modules-left { margin-left: 10px; }
+.modules-right { margin-right: 10px; }
+
+button {
+  border: none;
+}
+
+/* Utilities */
+#custom-arch,
+#custom-powerprofile,
+#custom-themeswitcher,
+#custom-wlogout {
+  padding: 0 8px;
+}
+
+#custom-wlogout:hover {
+  color: @urgent;
+}
+
+/* Workspaces */
+#workspaces button {
+  padding: 0 8px;
+  background: transparent;
+}
+
+#workspaces button.active {
+  background: @second-background;
+  color: @focused2;
+}
+
+/* Media */
+#mpris {
+  padding: 0 9px;
+}
+
+#mpris.playing {
+  background-color: @color3;
+  color: @background;
+}
+
+/* Right modules */
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#bluetooth,
+#idle_inhibitor,
+#custom-swaync,
+#backlight,
+#wireplumber {
+  padding: 0 10px;
+}
+
+#bluetooth:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#clock:hover,
+#battery:hover,
+#idle_inhibitor:hover,
+#custom-swaync:hover,
+#backlight:hover,
+#wireplumber:hover {
+  color: @color1;
+}
+
+#battery.charging,
+#battery.plugged {
+  background-color: @focused2;
+  color: @background;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @urgent;
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: @second-background;
+  }
+}
