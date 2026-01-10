@@ -237,3 +237,4 @@ Found improvements? Feel free to create issues or pull requests!
 
 **Last Updated:** January 2026  
 **Tested On:** Arch Linux / Hyprland 0.40+
+# unixco
