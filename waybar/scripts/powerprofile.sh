@@ -1,75 +1,44 @@
 #!/bin/bash
 
-# Get current power profile
 get_current_profile() {
-  if command -v powerprofilesctl &>/dev/null; then
-    powerprofilesctl get
-  else
-    echo "power-saver" # fallback
-  fi
+  powerprofilesctl get 2>/dev/null || echo "power-saver"
 }
 
-# Set power profile
 set_profile() {
-  case $1 in
-  "power-saver")
-    if command -v powerprofilesctl &>/dev/null; then
-      powerprofilesctl set power-saver
-    fi
-    ;;
-  "balanced")
-    if command -v powerprofilesctl &>/dev/null; then
-      powerprofilesctl set balanced
-    fi
-    ;;
-  "performance")
-    if command -v powerprofilesctl &>/dev/null; then
-      powerprofilesctl set performance
-    fi
-    ;;
-  esac
+  powerprofilesctl set "$1"
 }
 
-# Toggle between profiles
+notify() {
+  notify-send \
+    -a "Power Profile" \
+    -u low \
+    "Power Profile Changed" \
+    "Mode: $1"
+}
+
+
 toggle_profile() {
   current=$(get_current_profile)
-  case $current in
-  "power-saver")
-    set_profile "balanced"
-    ;;
-  "balanced")
-    set_profile "performance"
-    ;;
-  "performance")
-    set_profile "power-saver"
-    ;;
+
+  case "$current" in
+    power-saver) new="balanced" ;;
+    balanced) new="performance" ;;
+    performance) new="power-saver" ;;
   esac
+
+  set_profile "$new"
+  notify "$new"
 }
 
-# Display current profile with icon only
 display_profile() {
-  current=$(get_current_profile)
-  case $current in
-  "power-saver")
-    echo "󰾆" # Battery/efficiency icon
-    ;;
-  "balanced")
-    echo "󰾅" # Balanced icon
-    ;;
-  "performance")
-    echo "󰓅" # Performance/rocket icon
-    ;;
+  case "$(get_current_profile)" in
+    power-saver) echo "󰾆" ;;
+    balanced) echo "󰾅" ;;
+    performance) echo "󰓅" ;;
   esac
 }
 
-# Handle arguments
-case $1 in
-"toggle")
-  toggle_profile
-  display_profile
-  ;;
-"display" | *)
-  display_profile
-  ;;
+case "$1" in
+  toggle) toggle_profile ;;
+  *) display_profile ;;
 esac
-exit 0
