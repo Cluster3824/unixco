@@ -186,6 +186,7 @@
         "custom/split",
         "network",
         "bluetooth",
+        "custom/clipboard",
         "battery",
         "custom/swaync",
         "custom/closebracket"
@@ -252,11 +253,16 @@
     },
 
     "custom/swaync1": {
-  "format": "",
-  "tooltip": false,
-  "on-click": "swaync-client --toggle-panel",
-  "on-hover": "swaync-client --toggle-panel",
-  "interval": 1
+      "format": "",
+      "tooltip": false,
+      "on-click": "swaync-client --toggle-panel",
+      "on-hover": "swaync-client --toggle-panel",
+      "interval": 1
+},
+    "custom/clipboard": {
+      "format": "󰅍",
+      "tooltip": "Clipboard Manager",
+      "on-click": "pkill -f clipboard.sh; ~/.config/waybar/scripts/clipboard_menu.sh &"
 }
 
   }
